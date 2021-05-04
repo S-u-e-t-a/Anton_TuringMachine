@@ -12,20 +12,27 @@ namespace TuringMachine
 {
     public partial class MainForm : Form
     {
+        public static Line line = new Line(); 
         public MainForm()
         {
             InitializeComponent();
+            var f = new Empty(line);
+            f.ShowDialog();
+            for (int i = 0; i < line.countEmpty; i++)
+            {
+                textBoxLine.Text += "*";
+            }
         }
 
         List<string> pointers = new List<string>();
         List<string> Line = new List<string>();
         List<string> Alph = new List<string>();
 
-        int pointerPosition = 9;
+        int pointerPosition = line.countEmpty-1;
 
         public bool check(string text)
         {
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < line.countEmpty; i++)
             {
                 if(text[i] != '*')
                 {
@@ -39,7 +46,11 @@ namespace TuringMachine
             ButtonBack.Enabled = false;
             ButtonFront.Enabled = false;
             textBoxPointer.Text = "";
-            textBoxLine.Text = "**********";
+            textBoxLine.Text = "";
+            for (int i = 0; i < line.countEmpty; i++)
+            {
+                textBoxLine.Text += "*";
+            }
             Alph.Clear();
             Line.Clear();
         }
@@ -79,7 +90,10 @@ namespace TuringMachine
         private void ButtonEnterLine_Click(object sender, EventArgs e)
         {
             int counter = 0;
-            textBoxLine.Text += "**********";
+            for (int i = 0; i < line.countEmpty; i++)
+            {
+                textBoxLine.Text += "*";
+            }
             for (int i = 0; i < textBoxLine.TextLength; i++)
             {
                 Line.Add(textBoxLine.Text[i].ToString());
@@ -100,7 +114,7 @@ namespace TuringMachine
          
             if (counter == 0 && textBoxLine.TextLength != 0 && Alph.Distinct().ToList().Count == Alph.Count && check(textBoxLine.Text))
             {
-                pointerPosition = 9;
+                pointerPosition = line.countEmpty-1;
                 CreatingLine();
                 for (int i = 0; i < textBoxLine.TextLength; i++)
                 {
@@ -132,7 +146,7 @@ namespace TuringMachine
             }
             else if (!check(textBoxLine.Text))
             {
-                MessageBox.Show("Для корректной работы в начале ленты необходимо 10 символов \"*\" (звёздочка)!",
+                MessageBox.Show("Для корректной работы в начале ленты необходимо столько символо \"*\" (звёздочка), сколько вы указали изначально!",
                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Erase();
             }
@@ -200,8 +214,22 @@ namespace TuringMachine
         private void buttonEraseLine_Click(object sender, EventArgs e)
         {
             ButtonEnterLine.Enabled = true;
-            textBoxLine.Text = "**********";
+            textBoxLine.Text = "";
+            for (int i = 0; i < line.countEmpty; i++)
+            {
+                textBoxLine.Text += "*";
+            }
             textBoxPointer.Text = "";
+        }
+
+        private void ResetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void InfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
