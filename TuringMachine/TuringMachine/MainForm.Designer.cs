@@ -1,6 +1,6 @@
 ﻿namespace TuringMachine
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelPointer = new System.Windows.Forms.Label();
             this.ButtonFront = new System.Windows.Forms.Button();
             this.ButtonBack = new System.Windows.Forms.Button();
             this.textBoxLine = new System.Windows.Forms.TextBox();
             this.ButtonEnterLine = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBoxTask = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxAlph = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -43,25 +40,17 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ButtonAddColumns = new System.Windows.Forms.Button();
             this.ButtonDeleteColumns = new System.Windows.Forms.Button();
+            this.textBoxPointer = new System.Windows.Forms.TextBox();
+            this.buttonEraseLine = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // labelPointer
-            // 
-            this.labelPointer.AutoSize = true;
-            this.labelPointer.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPointer.Location = new System.Drawing.Point(8, 240);
-            this.labelPointer.Name = "labelPointer";
-            this.labelPointer.Size = new System.Drawing.Size(0, 31);
-            this.labelPointer.TabIndex = 0;
             // 
             // ButtonFront
             // 
             this.ButtonFront.Enabled = false;
             this.ButtonFront.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonFront.Location = new System.Drawing.Point(710, 155);
+            this.ButtonFront.Location = new System.Drawing.Point(710, 29);
             this.ButtonFront.Name = "ButtonFront";
             this.ButtonFront.Size = new System.Drawing.Size(78, 46);
             this.ButtonFront.TabIndex = 1;
@@ -73,7 +62,7 @@
             // 
             this.ButtonBack.Enabled = false;
             this.ButtonBack.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonBack.Location = new System.Drawing.Point(12, 155);
+            this.ButtonBack.Location = new System.Drawing.Point(12, 29);
             this.ButtonBack.Name = "ButtonBack";
             this.ButtonBack.Size = new System.Drawing.Size(78, 46);
             this.ButtonBack.TabIndex = 2;
@@ -84,17 +73,18 @@
             // textBoxLine
             // 
             this.textBoxLine.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxLine.Location = new System.Drawing.Point(12, 207);
+            this.textBoxLine.Location = new System.Drawing.Point(12, 82);
             this.textBoxLine.Name = "textBoxLine";
             this.textBoxLine.Size = new System.Drawing.Size(776, 38);
             this.textBoxLine.TabIndex = 3;
+            this.textBoxLine.Text = "**********";
             // 
             // ButtonEnterLine
             // 
             this.ButtonEnterLine.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonEnterLine.Location = new System.Drawing.Point(215, 156);
+            this.ButtonEnterLine.Location = new System.Drawing.Point(218, 30);
             this.ButtonEnterLine.Name = "ButtonEnterLine";
-            this.ButtonEnterLine.Size = new System.Drawing.Size(220, 46);
+            this.ButtonEnterLine.Size = new System.Drawing.Size(78, 46);
             this.ButtonEnterLine.TabIndex = 5;
             this.ButtonEnterLine.Text = "Ввести ленту";
             this.ButtonEnterLine.UseVisualStyleBackColor = true;
@@ -103,43 +93,25 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 264);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 170);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(656, 186);
             this.dataGridView1.TabIndex = 6;
             // 
-            // textBoxTask
-            // 
-            this.textBoxTask.Location = new System.Drawing.Point(6, 19);
-            this.textBoxTask.Multiline = true;
-            this.textBoxTask.Name = "textBoxTask";
-            this.textBoxTask.Size = new System.Drawing.Size(764, 98);
-            this.textBoxTask.TabIndex = 7;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textBoxTask);
-            this.groupBox1.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 26);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 123);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Условие:";
-            // 
             // textBoxAlph
             // 
             this.textBoxAlph.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxAlph.Location = new System.Drawing.Point(96, 175);
+            this.textBoxAlph.Location = new System.Drawing.Point(99, 50);
             this.textBoxAlph.Name = "textBoxAlph";
             this.textBoxAlph.Size = new System.Drawing.Size(113, 26);
             this.textBoxAlph.TabIndex = 8;
+            this.textBoxAlph.Text = "*";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(96, 156);
+            this.label2.Location = new System.Drawing.Point(96, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 18);
             this.label2.TabIndex = 9;
@@ -173,7 +145,7 @@
             // ButtonAddColumns
             // 
             this.ButtonAddColumns.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonAddColumns.Location = new System.Drawing.Point(674, 264);
+            this.ButtonAddColumns.Location = new System.Drawing.Point(674, 170);
             this.ButtonAddColumns.Name = "ButtonAddColumns";
             this.ButtonAddColumns.Size = new System.Drawing.Size(114, 46);
             this.ButtonAddColumns.TabIndex = 11;
@@ -184,36 +156,53 @@
             // ButtonDeleteColumns
             // 
             this.ButtonDeleteColumns.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonDeleteColumns.Location = new System.Drawing.Point(674, 316);
+            this.ButtonDeleteColumns.Location = new System.Drawing.Point(674, 222);
             this.ButtonDeleteColumns.Name = "ButtonDeleteColumns";
             this.ButtonDeleteColumns.Size = new System.Drawing.Size(114, 46);
             this.ButtonDeleteColumns.TabIndex = 12;
             this.ButtonDeleteColumns.Text = "Удалить столбец";
             this.ButtonDeleteColumns.UseVisualStyleBackColor = true;
             // 
+            // textBoxPointer
+            // 
+            this.textBoxPointer.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPointer.Location = new System.Drawing.Point(12, 126);
+            this.textBoxPointer.Name = "textBoxPointer";
+            this.textBoxPointer.Size = new System.Drawing.Size(776, 38);
+            this.textBoxPointer.TabIndex = 13;
+            // 
+            // buttonEraseLine
+            // 
+            this.buttonEraseLine.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonEraseLine.Location = new System.Drawing.Point(302, 30);
+            this.buttonEraseLine.Name = "buttonEraseLine";
+            this.buttonEraseLine.Size = new System.Drawing.Size(92, 46);
+            this.buttonEraseLine.TabIndex = 14;
+            this.buttonEraseLine.Text = "Стереть ленту";
+            this.buttonEraseLine.UseVisualStyleBackColor = true;
+            this.buttonEraseLine.Click += new System.EventHandler(this.buttonEraseLine_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 462);
+            this.ClientSize = new System.Drawing.Size(800, 371);
+            this.Controls.Add(this.buttonEraseLine);
+            this.Controls.Add(this.textBoxPointer);
             this.Controls.Add(this.ButtonDeleteColumns);
             this.Controls.Add(this.ButtonAddColumns);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ButtonEnterLine);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBoxAlph);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBoxLine);
             this.Controls.Add(this.ButtonBack);
             this.Controls.Add(this.ButtonFront);
-            this.Controls.Add(this.labelPointer);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Машина Тьюринга";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -222,15 +211,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label labelPointer;
         private System.Windows.Forms.Button ButtonFront;
         private System.Windows.Forms.Button ButtonBack;
         private System.Windows.Forms.TextBox textBoxLine;
         private System.Windows.Forms.Button ButtonEnterLine;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBoxTask;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBoxAlph;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -238,6 +223,8 @@
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.Button ButtonAddColumns;
         private System.Windows.Forms.Button ButtonDeleteColumns;
+        private System.Windows.Forms.TextBox textBoxPointer;
+        private System.Windows.Forms.Button buttonEraseLine;
     }
 }
 

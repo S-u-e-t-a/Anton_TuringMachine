@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TuringMachine
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -21,19 +21,31 @@ namespace TuringMachine
         List<string> Line = new List<string>();
         List<string> Alph = new List<string>();
 
-        int pointerPosition = -1;
+        int pointerPosition = 9;
 
+        public bool check(string text)
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                if(text[i] != '*')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         public void Erase()
         {
             ButtonBack.Enabled = false;
             ButtonFront.Enabled = false;
-            labelPointer.Text = "";
+            textBoxPointer.Text = "";
+            textBoxLine.Text = "**********";
             Alph.Clear();
             Line.Clear();
         }
         private void CreatingLine() // создает ленту
         {
-            labelPointer.Text = "";
+            textBoxPointer.Text = "";
             pointers.Clear();
             for (int i = 0; i < textBoxLine.TextLength; i++)
             {
@@ -48,7 +60,7 @@ namespace TuringMachine
                 pointers[pointerPosition] = "*";
                 for (int i = 0; i < textBoxLine.TextLength; i++)
                 {
-                    labelPointer.Text += pointers[i];
+                    textBoxPointer.Text += pointers[i];
                 }
                 return;
             }
@@ -58,7 +70,7 @@ namespace TuringMachine
                 pointers[pointerPosition] = "*";
                 for (int i = 0; i < textBoxLine.TextLength; i++)
                 {
-                    labelPointer.Text += pointers[i];
+                    textBoxPointer.Text += pointers[i];
                 }
                 return;
             }
@@ -67,7 +79,7 @@ namespace TuringMachine
         private void ButtonEnterLine_Click(object sender, EventArgs e)
         {
             int counter = 0;
-
+            textBoxLine.Text += "**********";
             for (int i = 0; i < textBoxLine.TextLength; i++)
             {
                 Line.Add(textBoxLine.Text[i].ToString());
@@ -86,18 +98,19 @@ namespace TuringMachine
                 }
             }
          
-            if (counter == 0 && textBoxLine.TextLength != 0 && Alph.Distinct().ToList().Count == Alph.Count)
+            if (counter == 0 && textBoxLine.TextLength != 0 && Alph.Distinct().ToList().Count == Alph.Count && check(textBoxLine.Text))
             {
-                pointerPosition = -1;
+                pointerPosition = 9;
                 CreatingLine();
                 for (int i = 0; i < textBoxLine.TextLength; i++)
                 {
-                    labelPointer.Text += pointers[i];
+                    textBoxPointer.Text += pointers[i];
                 }
                 ButtonBack.Enabled = true;
                 ButtonFront.Enabled = true;
                 CreateTable();
                 Alph.Clear();
+                ButtonEnterLine.Enabled = false;
             }
             else if (counter != 0)
             {
@@ -117,6 +130,12 @@ namespace TuringMachine
                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Erase();
             }
+            else if (!check(textBoxLine.Text))
+            {
+                MessageBox.Show("Для корректной работы в начале ленты необходимо 10 символов \"*\" (звёздочка)!",
+                   "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Erase();
+            }
             counter = 0;
         }
 
@@ -129,7 +148,7 @@ namespace TuringMachine
                 pointers[pointerPosition] = "*";
                 for (int i = 0; i < textBoxLine.TextLength; i++)
                 {
-                    labelPointer.Text += pointers[i];
+                    textBoxPointer.Text += pointers[i];
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -151,7 +170,7 @@ namespace TuringMachine
                 pointers[pointerPosition] = "*";
                 for (int i = 0; i < textBoxLine.TextLength; i++)
                 {
-                    labelPointer.Text += pointers[i];
+                    textBoxPointer.Text += pointers[i];
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -176,6 +195,13 @@ namespace TuringMachine
         private void ButtonAddColumns_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonEraseLine_Click(object sender, EventArgs e)
+        {
+            ButtonEnterLine.Enabled = true;
+            textBoxLine.Text = "**********";
+            textBoxPointer.Text = "";
         }
     }
 }
