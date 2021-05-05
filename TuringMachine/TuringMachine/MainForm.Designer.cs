@@ -180,6 +180,7 @@
             // 
             // ButtonAddColumns
             // 
+            this.ButtonAddColumns.Enabled = false;
             this.ButtonAddColumns.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ButtonAddColumns.Location = new System.Drawing.Point(674, 170);
             this.ButtonAddColumns.Name = "ButtonAddColumns";
@@ -191,6 +192,7 @@
             // 
             // ButtonDeleteColumns
             // 
+            this.ButtonDeleteColumns.Enabled = false;
             this.ButtonDeleteColumns.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ButtonDeleteColumns.Location = new System.Drawing.Point(674, 222);
             this.ButtonDeleteColumns.Name = "ButtonDeleteColumns";
