@@ -39,8 +39,6 @@
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.загрузитьЛентуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.сохранитьЛентуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьТаблицуСостоянийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +46,7 @@
             this.ButtonDeleteColumns = new System.Windows.Forms.Button();
             this.textBoxPointer = new System.Windows.Forms.TextBox();
             this.buttonEraseLine = new System.Windows.Forms.Button();
+            this.ButtonStep = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +82,7 @@
             this.textBoxLine.Name = "textBoxLine";
             this.textBoxLine.Size = new System.Drawing.Size(776, 38);
             this.textBoxLine.TabIndex = 3;
+            this.textBoxLine.TabStop = false;
             // 
             // ButtonEnterLine
             // 
@@ -100,6 +100,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 170);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(656, 186);
             this.dataGridView1.TabIndex = 6;
             // 
@@ -138,8 +139,6 @@
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetToolStripMenuItem,
             this.toolStripSeparator1,
-            this.загрузитьЛентуToolStripMenuItem,
-            this.toolStripSeparator2,
             this.сохранитьЛентуToolStripMenuItem,
             this.сохранитьТаблицуСостоянийToolStripMenuItem});
             this.файлToolStripMenuItem.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -158,17 +157,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(343, 6);
-            // 
-            // загрузитьЛентуToolStripMenuItem
-            // 
-            this.загрузитьЛентуToolStripMenuItem.Name = "загрузитьЛентуToolStripMenuItem";
-            this.загрузитьЛентуToolStripMenuItem.Size = new System.Drawing.Size(346, 22);
-            this.загрузитьЛентуToolStripMenuItem.Text = "Загрузить ленту";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(343, 6);
             // 
             // сохранитьЛентуToolStripMenuItem
             // 
@@ -210,12 +198,14 @@
             this.ButtonDeleteColumns.TabIndex = 12;
             this.ButtonDeleteColumns.Text = "Удалить столбец";
             this.ButtonDeleteColumns.UseVisualStyleBackColor = true;
+            this.ButtonDeleteColumns.Click += new System.EventHandler(this.ButtonDeleteColumns_Click);
             // 
             // textBoxPointer
             // 
             this.textBoxPointer.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxPointer.Location = new System.Drawing.Point(12, 126);
             this.textBoxPointer.Name = "textBoxPointer";
+            this.textBoxPointer.ReadOnly = true;
             this.textBoxPointer.Size = new System.Drawing.Size(776, 38);
             this.textBoxPointer.TabIndex = 13;
             // 
@@ -230,11 +220,23 @@
             this.buttonEraseLine.UseVisualStyleBackColor = true;
             this.buttonEraseLine.Click += new System.EventHandler(this.buttonEraseLine_Click);
             // 
+            // ButtonStep
+            // 
+            this.ButtonStep.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonStep.Location = new System.Drawing.Point(512, 30);
+            this.ButtonStep.Name = "ButtonStep";
+            this.ButtonStep.Size = new System.Drawing.Size(92, 46);
+            this.ButtonStep.TabIndex = 15;
+            this.ButtonStep.Text = "Шаг";
+            this.ButtonStep.UseVisualStyleBackColor = true;
+            this.ButtonStep.Click += new System.EventHandler(this.ButtonStep_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 371);
+            this.Controls.Add(this.ButtonStep);
             this.Controls.Add(this.buttonEraseLine);
             this.Controls.Add(this.textBoxPointer);
             this.Controls.Add(this.ButtonDeleteColumns);
@@ -247,6 +249,7 @@
             this.Controls.Add(this.ButtonBack);
             this.Controls.Add(this.ButtonFront);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Машина Тьюринга";
@@ -275,10 +278,9 @@
         private System.Windows.Forms.Button buttonEraseLine;
         private System.Windows.Forms.ToolStripMenuItem ResetToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem загрузитьЛентуToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem сохранитьЛентуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьТаблицуСостоянийToolStripMenuItem;
+        private System.Windows.Forms.Button ButtonStep;
     }
 }
 
