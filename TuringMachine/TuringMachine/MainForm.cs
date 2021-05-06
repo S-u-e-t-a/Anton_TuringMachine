@@ -8,28 +8,37 @@ namespace TuringMachine
 {
     public partial class MainForm : Form
     {
-        public static Line line = new Line();
+        public static ProcessWorkingMachine work = new ProcessWorkingMachine();
+        private List<string> pointers = new List<string>();
+        private List<string> LineList = new List<string>();
+        private List<string> Alph = new List<string>();
+        private int pointerPosition = work.CountEmpty - 1;
+
         public MainForm()
         {
             InitializeComponent();
             MaximizeBox = false;
-            var f = new Empty(line);
+
+            if (Settings.Default.Show == true)
+            {
+                InfoToolStripMenuItem_Click(null, null);
+                ShowInfoOnStartToolStripMenuItem.Checked = true;
+            }
+            else ShowInfoOnStartToolStripMenuItem.Checked = false;
+
+            var f = new Empty(work);
             f.ShowDialog();
-            for (int i = 0; i < line.countEmpty; i++)
+
+            if (work.CountEmpty == 0) work.CountEmpty = 1;
+            for (int i = 0; i < work.CountEmpty; i++)
             {
                 textBoxLine.Text += "*";
             }
         }
 
-        List<string> pointers = new List<string>();
-        List<string> LineList = new List<string>();
-        List<string> Alph = new List<string>();
-
-        int pointerPosition = line.countEmpty - 1;
-
         public bool Сheck(string text)
         {
-            for (int i = 0; i < line.countEmpty; i++)
+            for (int i = 0; i < work.CountEmpty; i++)
             {
                 if (text[i] != '*')
                 {
@@ -44,7 +53,7 @@ namespace TuringMachine
             ButtonFront.Enabled = false;
             textBoxPointer.Text = "";
             textBoxLine.Text = "";
-            for (int i = 0; i < line.countEmpty; i++)
+            for (int i = 0; i < work.CountEmpty; i++)
             {
                 textBoxLine.Text += "*";
             }
@@ -88,7 +97,7 @@ namespace TuringMachine
         {
             Alph.Clear();
             int counter = 0;
-            for (int i = 0; i < line.countEmpty; i++) // добавление пустого пространства в конец ленты
+            for (int i = 0; i < work.CountEmpty; i++) // добавление пустого пространства в конец ленты
             {
                 textBoxLine.Text += "*";
             }
@@ -110,9 +119,9 @@ namespace TuringMachine
                 }
             }
 
-            if (counter == 0 && textBoxLine.TextLength != 0 && Alph.Distinct().ToList().Count == Alph.Count && Сheck(textBoxLine.Text)) 
+            if (counter == 0 && textBoxLine.TextLength != 0 && Alph.Distinct().ToList().Count == Alph.Count && Сheck(textBoxLine.Text))
             { // если лента не содержит иных символов, лента не пуста, алфавит не содержит повторов, лента содержит установленные пустые ячейки, то
-                pointerPosition = line.countEmpty - 1; // позиция указателя на линии слева он первого
+                pointerPosition = work.CountEmpty - 1; // позиция указателя на линии слева он первого
                 CreatingLinePointer(); // создение полосы указателя
                 for (int i = 0; i < textBoxLine.TextLength; i++)
                 {
@@ -129,7 +138,7 @@ namespace TuringMachine
                 ButtonAddColumns.Enabled = true; // разблок управления таблицей
                 ButtonDeleteColumns.Enabled = true;
             }
-            else if (counter != 0) 
+            else if (counter != 0)
             {
                 MessageBox.Show("Лента содержит символы, необъявленные в алфавите. Проверьте правильность ленты и уточните алфавит.",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -214,17 +223,13 @@ namespace TuringMachine
         {
             ButtonEnterLine.Enabled = true; // разблок кнопки ввести ленту
             textBoxLine.Text = ""; // очиска ленты
-            for (int i = 0; i < line.countEmpty; i++)
+            for (int i = 0; i < work.CountEmpty; i++)
             {
                 textBoxLine.Text += "*";// добавление пустых ячеек (*)
             }
             textBoxPointer.Text = "";// очистка полосы указателя
-            pointerPosition = line.countEmpty; //позиция указателя слева от первого элемента ленты
+            pointerPosition = work.CountEmpty - 1; //позиция указателя слева от первого элемента ленты
             LineList.Clear();// очистка листа ленты
-            for (int i = 0; i < textBoxLine.TextLength; i++)
-            {
-                LineList.Add(textBoxLine.Text[i].ToString());// формирование заново
-            }
         }
 
         private void ResetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -246,12 +251,11 @@ namespace TuringMachine
                 textBoxLine.Text += LineList[i]; // выводим новую в соответствии с LineList 
             }
         }
-        ProcessWorkingMachine work = new ProcessWorkingMachine();
         private void ButtonStep_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                foreach(DataGridViewCell cell in row.Cells)
+                foreach (DataGridViewCell cell in row.Cells)
                 {
                     cell.Style.BackColor = Color.White; // красив в белый
                 }
@@ -266,22 +270,32 @@ namespace TuringMachine
 
             dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.GreenYellow; // красим в цвет, что мы там находимся
 
-            work.CurrentContentCell = LineList[pointerPosition]; //текущая клетка - значение ленты где стоит указатель снизу
-            work.Command = (string)dataGridView1[work.NextColumn, Alph.IndexOf(work.CurrentContentCell)].Value; // берем команду из ячейки таблицы
-            work.SplittedCommand = work.Command.Split(' ').ToList(); // сплитим ее по пробелам
-
-            work.NextColumn = work.SplittedCommand[0]; // 0 элемент это след колонка
-            work.Direction = work.SplittedCommand[1]; // 1 элемент это направление L R или H
-            work.ReplaceOnIt = work.SplittedCommand[2]; // 2 элемент это то на что заменяем
-       
-            LineList[pointerPosition] = work.ReplaceOnIt; // обновляем элемент в листе
-            UpdateLine(); // обновляем на ленте
-            if (work.Direction == "R") ButtonFront_Click(null, null); // сдвиг вправо
-            else if (work.Direction == "L") ButtonBack_Click(null, null); // сдвиг влево
-            else if (work.Direction == "H")// стоп машина
+            try
             {
-                MessageBox.Show("всё");
-                // ButtonStep.Enabled = false;
+
+                work.CurrentContentCell = LineList[pointerPosition]; //текущая клетка - значение ленты где стоит указатель снизу
+                work.Command = (string)dataGridView1[work.NextColumn, Alph.IndexOf(work.CurrentContentCell)].Value; // берем команду из ячейки таблицы
+                work.SplittedCommand = work.Command.Split(' ').ToList(); // сплитим ее по пробелам
+
+                work.NextColumn = work.SplittedCommand[0]; // 0 элемент это след колонка
+                work.Direction = work.SplittedCommand[1]; // 1 элемент это направление L R или H
+                work.ReplaceOnIt = work.SplittedCommand[2]; // 2 элемент это то на что заменяем
+
+                LineList[pointerPosition] = work.ReplaceOnIt; // обновляем элемент в листе
+                UpdateLine(); // обновляем на ленте
+                if (work.Direction == "R") ButtonFront_Click(null, null); // сдвиг вправо
+                else if (work.Direction == "L") ButtonBack_Click(null, null); // сдвиг влево
+                else if (work.Direction == "H")// стоп машина
+                {
+                    MessageBox.Show("всё");
+                    // ButtonStep.Enabled = false;
+                }
+            }
+            catch (NullReferenceException)
+            {
+                string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") не содержит команды";
+                dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
+                MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -298,5 +312,21 @@ namespace TuringMachine
                 dataGridView1.Columns.RemoveAt(dataGridView1.CurrentCell.ColumnIndex);
         }
 
+        private void ShowInfoOnStartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ShowInfoOnStartToolStripMenuItem.Checked)
+            {
+                ShowInfoOnStartToolStripMenuItem.Checked = false;
+                Settings.Default.Show = false;
+                Settings.Default.Save();
+            }
+            else
+            {
+                ShowInfoOnStartToolStripMenuItem.Checked = true;
+                Settings.Default.Show = true;
+                Settings.Default.Save();
+
+            }
+        }
     }
 }

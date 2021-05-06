@@ -4,6 +4,7 @@ namespace TuringMachine
 {
     public class ProcessWorkingMachine
     {
+        public int CountEmpty { get; set; }
         public string CurrentContentCell { get; set; }
         public string Command { get; set; }
         public List<string> SplittedCommand { get; set; }

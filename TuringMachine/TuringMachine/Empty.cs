@@ -12,17 +12,17 @@ namespace TuringMachine
 {
     public partial class Empty : Form
     {
-        Line line = new Line();
-        public Empty(Line l)
+        ProcessWorkingMachine work = new ProcessWorkingMachine();
+        public Empty(ProcessWorkingMachine w)
         {
             InitializeComponent();
-            line = l;
+            work = w;
             MaximizeBox = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            line.countEmpty = Convert.ToInt32(numericUpDown1.Value);
+            work.CountEmpty = Convert.ToInt32(numericUpDown1.Value);
             Close();
         }
     }

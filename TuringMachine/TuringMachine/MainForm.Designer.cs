@@ -47,6 +47,8 @@
             this.textBoxPointer = new System.Windows.Forms.TextBox();
             this.buttonEraseLine = new System.Windows.Forms.Button();
             this.ButtonStep = new System.Windows.Forms.Button();
+            this.ShowInfoOnStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -140,7 +142,9 @@
             this.ResetToolStripMenuItem,
             this.toolStripSeparator1,
             this.сохранитьЛентуToolStripMenuItem,
-            this.сохранитьТаблицуСостоянийToolStripMenuItem});
+            this.сохранитьТаблицуСостоянийToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.ShowInfoOnStartToolStripMenuItem});
             this.файлToolStripMenuItem.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(60, 22);
@@ -149,25 +153,25 @@
             // ResetToolStripMenuItem
             // 
             this.ResetToolStripMenuItem.Name = "ResetToolStripMenuItem";
-            this.ResetToolStripMenuItem.Size = new System.Drawing.Size(346, 22);
+            this.ResetToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
             this.ResetToolStripMenuItem.Text = "Перезапуск";
             this.ResetToolStripMenuItem.Click += new System.EventHandler(this.ResetToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(343, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(373, 6);
             // 
             // сохранитьЛентуToolStripMenuItem
             // 
             this.сохранитьЛентуToolStripMenuItem.Name = "сохранитьЛентуToolStripMenuItem";
-            this.сохранитьЛентуToolStripMenuItem.Size = new System.Drawing.Size(346, 22);
+            this.сохранитьЛентуToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
             this.сохранитьЛентуToolStripMenuItem.Text = "Сохранить ленту";
             // 
             // сохранитьТаблицуСостоянийToolStripMenuItem
             // 
             this.сохранитьТаблицуСостоянийToolStripMenuItem.Name = "сохранитьТаблицуСостоянийToolStripMenuItem";
-            this.сохранитьТаблицуСостоянийToolStripMenuItem.Size = new System.Drawing.Size(346, 22);
+            this.сохранитьТаблицуСостоянийToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
             this.сохранитьТаблицуСостоянийToolStripMenuItem.Text = "Сохранить таблицу состояний";
             // 
             // InfoToolStripMenuItem
@@ -233,6 +237,20 @@
             this.ButtonStep.UseVisualStyleBackColor = true;
             this.ButtonStep.Click += new System.EventHandler(this.ButtonStep_Click);
             // 
+            // ShowInfoOnStartToolStripMenuItem
+            // 
+            this.ShowInfoOnStartToolStripMenuItem.Checked = true;
+            this.ShowInfoOnStartToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ShowInfoOnStartToolStripMenuItem.Name = "ShowInfoOnStartToolStripMenuItem";
+            this.ShowInfoOnStartToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.ShowInfoOnStartToolStripMenuItem.Text = "Показывать справку при запуске";
+            this.ShowInfoOnStartToolStripMenuItem.Click += new System.EventHandler(this.ShowInfoOnStartToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(373, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -283,6 +301,8 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьЛентуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьТаблицуСостоянийToolStripMenuItem;
         private System.Windows.Forms.Button ButtonStep;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem ShowInfoOnStartToolStripMenuItem;
     }
 }
 

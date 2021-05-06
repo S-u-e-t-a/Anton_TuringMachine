@@ -54,7 +54,7 @@
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InfoForm";
-            this.Text = "InfoForm";
+            this.Text = "Справка";
             this.ResumeLayout(false);
             this.PerformLayout();
 
