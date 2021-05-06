@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace TuringMachine
 {
+       
     public partial class MainForm : Form
     {
         public static ProcessWorkingMachine work = new ProcessWorkingMachine();
@@ -122,7 +123,7 @@ namespace TuringMachine
                 }
             }
 
-            if (counter == 0 && (textBoxLine.TextLength != work.CountEmpty*2) && Alph.Distinct().ToList().Count == Alph.Count && Сheck(textBoxLine.Text))
+            if (counter == 0 && (textBoxLine.TextLength != work.CountEmpty * 2) && Alph.Distinct().ToList().Count == Alph.Count && Сheck(textBoxLine.Text))
             { // если лента не содержит иных символов, лента не пуста, алфавит не содержит повторов, лента содержит установленные пустые ячейки, то
                 pointerPosition = work.CountEmpty - 1; // позиция указателя на линии слева он первого
                 CreatingLinePointer(); // создение полосы указателя
@@ -151,7 +152,7 @@ namespace TuringMachine
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Erase();
             }
-            else if (textBoxLine.TextLength == work.CountEmpty*2)
+            else if (textBoxLine.TextLength == work.CountEmpty * 2)
             {
                 MessageBox.Show("Вы ввели пустую ленту. Укажите хотя бы одно значение",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -291,9 +292,25 @@ namespace TuringMachine
                 work.Command = (string)dataGridView1[work.NextColumn, Alph.IndexOf(work.CurrentContentCell)].Value; // берем команду из ячейки таблицы
                 work.SplittedCommand = work.Command.Split(' ').ToList(); // сплитим ее по пробелам
 
-                work.NextColumn = work.SplittedCommand[0]; // 0 элемент это след колонка
+                if (dataGridView1.Columns.Contains(work.SplittedCommand[0]))
+                {
+                    work.NextColumn = work.SplittedCommand[0]; // 0 элемент это след колонка
+                }
+                else
+                {
+                    throw new NextColumnException();
+                }
+
                 work.Direction = work.SplittedCommand[1]; // 1 элемент это направление L R или H
-                work.ReplaceOnIt = work.SplittedCommand[2]; // 2 элемент это то на что заменяем
+
+                if (Alph.Contains(work.SplittedCommand[2]))
+                {
+                    work.ReplaceOnIt = work.SplittedCommand[2]; // 2 элемент это то на что заменяем
+                }
+                else
+                {
+                    throw new AlphabetException();
+                }
 
                 LineList[pointerPosition] = work.ReplaceOnIt; // обновляем элемент в листе
                 UpdateLine(); // обновляем на ленте
@@ -301,13 +318,34 @@ namespace TuringMachine
                 else if (work.Direction == "L") ButtonBack_Click(null, null); // сдвиг влево
                 else if (work.Direction == "H")// стоп машина
                 {
-                    MessageBox.Show("всё");
-                    // ButtonStep.Enabled = false;
+                    MessageBox.Show("Выполнение программы завершено");
+                }
+                else
+                {
+                    throw new WrongDirectionException();
                 }
             }
             catch (NullReferenceException)
             {
                 string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") не содержит команды";
+                dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
+                MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (AlphabetException)
+            {
+                string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") содержит необъявленный в алфавите символ. Замена на ленте невозможна.";
+                dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
+                MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (WrongDirectionException)
+            {
+                string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") содержит неверное значение направления сдвига по ленте. Сдвиг по ленте невозможен.";
+                dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
+                MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (NextColumnException)
+            {
+                string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") содержит номер несуществующего состояния. Переход в указанное состояние невозможен";
                 dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
                 MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -368,19 +406,32 @@ namespace TuringMachine
 
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
-                ExcelApp.Cells[2, i+1] = dataGridView1.Columns[i].HeaderText;
+                ExcelApp.Cells[2, i + 1] = dataGridView1.Columns[i].HeaderText;
             }
 
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
-                for(int j = 0; j < dataGridView1.RowCount; j++)
+                for (int j = 0; j < dataGridView1.RowCount; j++)
                 {
-                    ExcelApp.Cells[j+3, i+1] = dataGridView1[i, j].Value;
+                    ExcelApp.Cells[j + 3, i + 1] = dataGridView1[i, j].Value;
                 }
             }
             ExcelApp.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             ExcelApp.Visible = true;
             ExcelApp.UserControl = true;
         }
+    }
+    // область описания пользовательских исключений
+    public class AlphabetException : ApplicationException
+    {
+        public AlphabetException() : base() { }
+    }
+    public class WrongDirectionException : ApplicationException
+    {
+        public WrongDirectionException() : base() { }
+    }
+    public class NextColumnException : ApplicationException
+    {
+        public NextColumnException() : base() { }
     }
 }
