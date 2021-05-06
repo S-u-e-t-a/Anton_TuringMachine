@@ -51,6 +51,9 @@ namespace TuringMachine
         {
             ButtonBack.Enabled = false;
             ButtonFront.Enabled = false;
+            SaveLineToolStripMenuItem.Enabled = false;
+            SaveTableToolStripMenuItem.Enabled = false;
+
             textBoxPointer.Text = "";
             textBoxLine.Text = "";
             for (int i = 0; i < work.CountEmpty; i++)
@@ -137,6 +140,10 @@ namespace TuringMachine
 
                 ButtonAddColumns.Enabled = true; // разблок управления таблицей
                 ButtonDeleteColumns.Enabled = true;
+
+                SaveLineToolStripMenuItem.Enabled = true;
+                SaveTableToolStripMenuItem.Enabled = true;
+
             }
             else if (counter != 0)
             {
@@ -217,6 +224,11 @@ namespace TuringMachine
             {
                 dataGridView1.Rows.Add(Alph[i]);
             }
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.DefaultCellStyle.Font = new Font("Courier New", 10, FontStyle.Bold);
         }
 
         private void buttonEraseLine_Click(object sender, EventArgs e) // стереть ленту
@@ -327,6 +339,46 @@ namespace TuringMachine
                 Settings.Default.Save();
 
             }
+        }
+
+        private void SaveLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
+            string fileOutputPath = saveFileDialog.FileName;
+            saveFileDialog.FileName = string.Empty;
+            System.IO.File.WriteAllText(fileOutputPath, "Лента: \n");
+            for (int i = work.CountEmpty; i < LineList.Count - work.CountEmpty; i++)
+            {
+                System.IO.File.AppendAllText(fileOutputPath, LineList[i]);
+            }
+        }
+
+        private void SaveTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook ExcelWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
+            //Книга
+            ExcelWorkBook = ExcelApp.Workbooks.Add(System.Reflection.Missing.Value);
+            //Таблица
+            ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
+            ExcelApp.Cells[1, 1] = "Таблица состояний:";
+
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                ExcelApp.Cells[2, i+1] = dataGridView1.Columns[i].HeaderText;
+            }
+
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                for(int j = 0; j < dataGridView1.RowCount; j++)
+                {
+                    ExcelApp.Cells[j+3, i+1] = dataGridView1[i, j].Value;
+                }
+            }
+            ExcelApp.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            ExcelApp.Visible = true;
+            ExcelApp.UserControl = true;
         }
     }
 }

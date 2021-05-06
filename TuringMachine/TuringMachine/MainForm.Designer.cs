@@ -39,16 +39,17 @@
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.сохранитьЛентуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьТаблицуСостоянийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ShowInfoOnStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ButtonAddColumns = new System.Windows.Forms.Button();
             this.ButtonDeleteColumns = new System.Windows.Forms.Button();
             this.textBoxPointer = new System.Windows.Forms.TextBox();
             this.buttonEraseLine = new System.Windows.Forms.Button();
             this.ButtonStep = new System.Windows.Forms.Button();
-            this.ShowInfoOnStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -141,8 +142,8 @@
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetToolStripMenuItem,
             this.toolStripSeparator1,
-            this.сохранитьЛентуToolStripMenuItem,
-            this.сохранитьТаблицуСостоянийToolStripMenuItem,
+            this.SaveLineToolStripMenuItem,
+            this.SaveTableToolStripMenuItem,
             this.toolStripSeparator2,
             this.ShowInfoOnStartToolStripMenuItem});
             this.файлToolStripMenuItem.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -162,17 +163,35 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(373, 6);
             // 
-            // сохранитьЛентуToolStripMenuItem
+            // SaveLineToolStripMenuItem
             // 
-            this.сохранитьЛентуToolStripMenuItem.Name = "сохранитьЛентуToolStripMenuItem";
-            this.сохранитьЛентуToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.сохранитьЛентуToolStripMenuItem.Text = "Сохранить ленту";
+            this.SaveLineToolStripMenuItem.Enabled = false;
+            this.SaveLineToolStripMenuItem.Name = "SaveLineToolStripMenuItem";
+            this.SaveLineToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.SaveLineToolStripMenuItem.Text = "Сохранить ленту";
+            this.SaveLineToolStripMenuItem.Click += new System.EventHandler(this.SaveLineToolStripMenuItem_Click);
             // 
-            // сохранитьТаблицуСостоянийToolStripMenuItem
+            // SaveTableToolStripMenuItem
             // 
-            this.сохранитьТаблицуСостоянийToolStripMenuItem.Name = "сохранитьТаблицуСостоянийToolStripMenuItem";
-            this.сохранитьТаблицуСостоянийToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.сохранитьТаблицуСостоянийToolStripMenuItem.Text = "Сохранить таблицу состояний";
+            this.SaveTableToolStripMenuItem.Enabled = false;
+            this.SaveTableToolStripMenuItem.Name = "SaveTableToolStripMenuItem";
+            this.SaveTableToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.SaveTableToolStripMenuItem.Text = "Сохранить таблицу состояний";
+            this.SaveTableToolStripMenuItem.Click += new System.EventHandler(this.SaveTableToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(373, 6);
+            // 
+            // ShowInfoOnStartToolStripMenuItem
+            // 
+            this.ShowInfoOnStartToolStripMenuItem.Checked = true;
+            this.ShowInfoOnStartToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ShowInfoOnStartToolStripMenuItem.Name = "ShowInfoOnStartToolStripMenuItem";
+            this.ShowInfoOnStartToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
+            this.ShowInfoOnStartToolStripMenuItem.Text = "Показывать справку при запуске";
+            this.ShowInfoOnStartToolStripMenuItem.Click += new System.EventHandler(this.ShowInfoOnStartToolStripMenuItem_Click);
             // 
             // InfoToolStripMenuItem
             // 
@@ -237,20 +256,6 @@
             this.ButtonStep.UseVisualStyleBackColor = true;
             this.ButtonStep.Click += new System.EventHandler(this.ButtonStep_Click);
             // 
-            // ShowInfoOnStartToolStripMenuItem
-            // 
-            this.ShowInfoOnStartToolStripMenuItem.Checked = true;
-            this.ShowInfoOnStartToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ShowInfoOnStartToolStripMenuItem.Name = "ShowInfoOnStartToolStripMenuItem";
-            this.ShowInfoOnStartToolStripMenuItem.Size = new System.Drawing.Size(376, 22);
-            this.ShowInfoOnStartToolStripMenuItem.Text = "Показывать справку при запуске";
-            this.ShowInfoOnStartToolStripMenuItem.Click += new System.EventHandler(this.ShowInfoOnStartToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(373, 6);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,11 +303,12 @@
         private System.Windows.Forms.Button buttonEraseLine;
         private System.Windows.Forms.ToolStripMenuItem ResetToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьЛентуToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьТаблицуСостоянийToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveTableToolStripMenuItem;
         private System.Windows.Forms.Button ButtonStep;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem ShowInfoOnStartToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
