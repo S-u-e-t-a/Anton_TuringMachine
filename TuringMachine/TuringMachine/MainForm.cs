@@ -122,7 +122,7 @@ namespace TuringMachine
                 }
             }
 
-            if (counter == 0 && textBoxLine.TextLength != 0 && Alph.Distinct().ToList().Count == Alph.Count && Сheck(textBoxLine.Text))
+            if (counter == 0 && (textBoxLine.TextLength != work.CountEmpty*2) && Alph.Distinct().ToList().Count == Alph.Count && Сheck(textBoxLine.Text))
             { // если лента не содержит иных символов, лента не пуста, алфавит не содержит повторов, лента содержит установленные пустые ячейки, то
                 pointerPosition = work.CountEmpty - 1; // позиция указателя на линии слева он первого
                 CreatingLinePointer(); // создение полосы указателя
@@ -151,7 +151,7 @@ namespace TuringMachine
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Erase();
             }
-            else if (textBoxLine.TextLength == 0)
+            else if (textBoxLine.TextLength == work.CountEmpty*2)
             {
                 MessageBox.Show("Вы ввели пустую ленту. Укажите хотя бы одно значение",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -165,7 +165,7 @@ namespace TuringMachine
             }
             else if (!Сheck(textBoxLine.Text))
             {
-                MessageBox.Show("Для корректной работы в начале ленты необходимо столько символо \"*\" (звёздочка), сколько вы указали изначально!",
+                MessageBox.Show("Для корректной работы в начале ленты необходимо столько символов \"*\" (звёздочка), сколько вы указали изначально!",
                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Erase();
             }
@@ -242,6 +242,8 @@ namespace TuringMachine
             textBoxPointer.Text = "";// очистка полосы указателя
             pointerPosition = work.CountEmpty - 1; //позиция указателя слева от первого элемента ленты
             LineList.Clear();// очистка листа ленты
+            work.Command = null; work.Direction = null;
+            work.NextColumn = null; work.ReplaceOnIt = null;
         }
 
         private void ResetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -347,7 +349,7 @@ namespace TuringMachine
             string fileOutputPath = saveFileDialog.FileName;
             saveFileDialog.FileName = string.Empty;
             System.IO.File.WriteAllText(fileOutputPath, "Лента: \n");
-            for (int i = work.CountEmpty; i < LineList.Count - work.CountEmpty; i++)
+            for (int i = 0; i < LineList.Count; i++)
             {
                 System.IO.File.AppendAllText(fileOutputPath, LineList[i]);
             }
