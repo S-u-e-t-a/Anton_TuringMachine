@@ -145,6 +145,8 @@ namespace TuringMachine
                 SaveLineToolStripMenuItem.Enabled = true;
                 SaveTableToolStripMenuItem.Enabled = true;
 
+                ButtonStep.Enabled = true;
+
             }
             else if (counter != 0)
             {
@@ -235,6 +237,7 @@ namespace TuringMachine
         private void buttonEraseLine_Click(object sender, EventArgs e) // стереть ленту
         {
             ButtonEnterLine.Enabled = true; // разблок кнопки ввести ленту
+            ButtonStep.Enabled = false;
             textBoxLine.Text = ""; // очиска ленты
             for (int i = 0; i < work.CountEmpty; i++)
             {

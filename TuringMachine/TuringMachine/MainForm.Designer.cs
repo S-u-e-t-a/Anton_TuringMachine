@@ -247,6 +247,7 @@
             // 
             // ButtonStep
             // 
+            this.ButtonStep.Enabled = false;
             this.ButtonStep.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ButtonStep.Location = new System.Drawing.Point(512, 30);
             this.ButtonStep.Name = "ButtonStep";
