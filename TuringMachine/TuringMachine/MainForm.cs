@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.OleDb;
-using System.Reflection;
 
 namespace TuringMachine
 {
@@ -417,7 +415,7 @@ namespace TuringMachine
             Microsoft.Office.Interop.Excel.Workbook ExcelWorkBook;
             Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
             //Книга
-            ExcelWorkBook = ExcelApp.Workbooks.Add(System.Reflection.Missing.Value);
+            ExcelWorkBook = ExcelApp.Workbooks.Add(Missing.Value);
             //Таблица
             ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
             ExcelApp.Cells[1, 1] = "Таблица состояний:";
@@ -434,7 +432,7 @@ namespace TuringMachine
                     ExcelApp.Cells[j + 3, i + 1] = dataGridView1[i, j].Value;
                 }
             }
-            ExcelApp.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            ExcelApp.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
             ExcelApp.Visible = true;
             ExcelApp.UserControl = true;
         }
@@ -442,6 +440,7 @@ namespace TuringMachine
         private async void ButtonStart_Click(object sender, EventArgs e)
         {
             ButtonStart.Enabled = false;
+            DelayNumericUpDown.Enabled = false;
 
             ButtonPause.Enabled = true;
             ButtonStop.Enabled = true;
@@ -458,6 +457,7 @@ namespace TuringMachine
         {
             ButtonStart.Enabled = true;
             ButtonPause.Enabled = false;
+
         }
 
         private void ButtonStop_Click(object sender, EventArgs e)
@@ -476,6 +476,8 @@ namespace TuringMachine
             work.NextColumn = null; work.ReplaceOnIt = null;
 
             ButtonStart.Enabled = true;
+            DelayNumericUpDown.Enabled = true;
+
             ButtonPause.Enabled = false;
             ButtonStop.Enabled = false;
 

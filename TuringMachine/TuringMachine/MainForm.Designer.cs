@@ -114,7 +114,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 170);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(656, 186);
+            this.dataGridView1.Size = new System.Drawing.Size(702, 186);
             this.dataGridView1.TabIndex = 6;
             // 
             // textBoxAlph
@@ -228,11 +228,12 @@
             // 
             this.ButtonAddColumns.Enabled = false;
             this.ButtonAddColumns.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonAddColumns.Location = new System.Drawing.Point(674, 170);
+            this.ButtonAddColumns.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAddColumns.Image")));
+            this.ButtonAddColumns.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ButtonAddColumns.Location = new System.Drawing.Point(720, 182);
             this.ButtonAddColumns.Name = "ButtonAddColumns";
-            this.ButtonAddColumns.Size = new System.Drawing.Size(114, 46);
+            this.ButtonAddColumns.Size = new System.Drawing.Size(68, 76);
             this.ButtonAddColumns.TabIndex = 11;
-            this.ButtonAddColumns.Text = "Добавить столбец";
             this.ButtonAddColumns.UseVisualStyleBackColor = true;
             this.ButtonAddColumns.Click += new System.EventHandler(this.ButtonAddColumns_Click);
             // 
@@ -240,11 +241,13 @@
             // 
             this.ButtonDeleteColumns.Enabled = false;
             this.ButtonDeleteColumns.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonDeleteColumns.Location = new System.Drawing.Point(674, 222);
+            this.ButtonDeleteColumns.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDeleteColumns.Image")));
+            this.ButtonDeleteColumns.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ButtonDeleteColumns.Location = new System.Drawing.Point(720, 264);
             this.ButtonDeleteColumns.Name = "ButtonDeleteColumns";
-            this.ButtonDeleteColumns.Size = new System.Drawing.Size(114, 46);
+            this.ButtonDeleteColumns.Size = new System.Drawing.Size(68, 76);
             this.ButtonDeleteColumns.TabIndex = 12;
-            this.ButtonDeleteColumns.Text = "Удалить столбец";
+            this.ButtonDeleteColumns.Text = "\r\n";
             this.ButtonDeleteColumns.UseVisualStyleBackColor = true;
             this.ButtonDeleteColumns.Click += new System.EventHandler(this.ButtonDeleteColumns_Click);
             // 
@@ -378,6 +381,7 @@
             this.Controls.Add(this.ButtonFront);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Машина Тьюринга";
