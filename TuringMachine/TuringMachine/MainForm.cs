@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace TuringMachine
 {
@@ -22,7 +23,6 @@ namespace TuringMachine
             InitializeComponent();
             MaximizeBox = false;
             saveFileDialog.Filter = "Text (*.txt)|*.txt";
-            openFileDialog.Filter = "Excel (*.XLS)|*.XLS";
 
             if (Settings.Default.Show == true)
             {
@@ -41,7 +41,7 @@ namespace TuringMachine
             }
         }
 
-        public bool Сheck(string text)
+        public bool Сheck(string text) //проверка наличия пустых ячеек
         {
             for (int i = 0; i < work.CountEmpty; i++)
             {
@@ -510,6 +510,5 @@ namespace TuringMachine
         {
             public NextColumnException() : base() { }
         }
-
     }
 }

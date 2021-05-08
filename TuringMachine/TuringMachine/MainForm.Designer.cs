@@ -58,7 +58,8 @@
             this.ButtonStop = new System.Windows.Forms.Button();
             this.DelayNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.проверитьНаличиеОбновленийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DelayNumericUpDown)).BeginInit();
@@ -156,7 +157,9 @@
             this.toolStripSeparator2,
             this.ShowInfoOnStartToolStripMenuItem,
             this.toolStripSeparator3,
-            this.ResetToolStripMenuItem});
+            this.ResetToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.проверитьНаличиеОбновленийToolStripMenuItem});
             this.файлToolStripMenuItem.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(60, 22);
@@ -357,6 +360,18 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Задержка:";
             // 
+            // проверитьНаличиеОбновленийToolStripMenuItem
+            // 
+            this.проверитьНаличиеОбновленийToolStripMenuItem.Enabled = false;
+            this.проверитьНаличиеОбновленийToolStripMenuItem.Name = "проверитьНаличиеОбновленийToolStripMenuItem";
+            this.проверитьНаличиеОбновленийToolStripMenuItem.Size = new System.Drawing.Size(456, 22);
+            this.проверитьНаличиеОбновленийToolStripMenuItem.Text = "Проверить наличие обновлений";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(453, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -384,7 +399,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Машина Тьюринга";
+            this.Text = "Эмулятор машины Тьюринга";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -424,7 +439,8 @@
         private System.Windows.Forms.Button ButtonStop;
         private System.Windows.Forms.NumericUpDown DelayNumericUpDown;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem проверитьНаличиеОбновленийToolStripMenuItem;
     }
 }
 
