@@ -152,6 +152,7 @@ namespace TuringMachine
 
                 ButtonStep.Enabled = true;
                 ButtonStart.Enabled = true;
+                ButtonFront_Click(null, null);
 
             }
             else if (counter != 0)
@@ -199,6 +200,7 @@ namespace TuringMachine
                    MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
                 RecoverPointer(true);
+                ButtonStop_Click(null, null);
 
             }
         }
@@ -221,6 +223,7 @@ namespace TuringMachine
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 RecoverPointer(false);
+                ButtonStop_Click(null, null);
             }
         }
 
@@ -311,16 +314,18 @@ namespace TuringMachine
                     throw new NextColumnException();
                 }
 
-                work.Direction = work.SplittedCommand[1]; // 1 элемент это направление L R или H
-
-                if (Alph.Contains(work.SplittedCommand[2]))
+                if (Alph.Contains(work.SplittedCommand[1]))
                 {
-                    work.ReplaceOnIt = work.SplittedCommand[2]; // 2 элемент это то на что заменяем
+                    work.ReplaceOnIt = work.SplittedCommand[1]; // 1 элемент это то на что заменяем
                 }
                 else
                 {
                     throw new AlphabetException();
                 }
+
+                work.Direction = work.SplittedCommand[2]; // 2 элемент это направление L R или H
+
+                
 
                 LineList[pointerPosition] = work.ReplaceOnIt; // обновляем элемент в листе
                 UpdateLine(); // обновляем на ленте
