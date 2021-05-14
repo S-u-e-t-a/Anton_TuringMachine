@@ -347,6 +347,7 @@ namespace TuringMachine
                 string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") не содержит команды";
                 dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
                 MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ButtonStop_Click(null, null);
                 ButtonStart.Enabled = true;
             }
             catch (AlphabetException)
@@ -354,6 +355,7 @@ namespace TuringMachine
                 string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") содержит необъявленный в алфавите символ. Замена на ленте невозможна.";
                 dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
                 MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ButtonStop_Click(null, null);
                 ButtonStart.Enabled = true;
             }
             catch (WrongDirectionException)
@@ -361,6 +363,7 @@ namespace TuringMachine
                 string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") содержит неверное значение направления сдвига по ленте. Сдвиг по ленте невозможен.";
                 dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
                 MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ButtonStop_Click(null, null);
                 ButtonStart.Enabled = true;
             }
             catch (NextColumnException)
@@ -368,6 +371,7 @@ namespace TuringMachine
                 string textError = "Ячейка (q" + work.NextColumn + ";" + LineList[pointerPosition] + ") содержит номер несуществующего состояния. Переход в указанное состояние невозможен";
                 dataGridView1.Rows[Alph.IndexOf(work.CurrentContentCell)].Cells[int.Parse(work.NextColumn)].Style.BackColor = Color.Red;
                 MessageBox.Show(textError, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ButtonStop_Click(null, null);
                 ButtonStart.Enabled = true;
             }
 
@@ -496,6 +500,7 @@ namespace TuringMachine
             f.ShowDialog();
 
             if (work.CountEmpty == 0) work.CountEmpty = 1;
+            textBoxLine.Text = string.Empty;
             for (int i = 0; i < work.CountEmpty; i++)
             {
                 textBoxLine.Text += "*";
